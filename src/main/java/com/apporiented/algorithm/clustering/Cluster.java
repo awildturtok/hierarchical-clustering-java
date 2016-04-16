@@ -16,18 +16,21 @@
 
 package com.apporiented.algorithm.clustering;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cluster {
+
+public class Cluster implements Serializable{
 
     private String name;
-
-    private Cluster parent;
-
     private List<Cluster> children;
 
-	private Distance distance = new Distance();
+    @JsonIgnore
+    transient private Cluster parent;
+    transient private Distance distance = new Distance();
 
     public Distance getDistance() {
         return distance;
@@ -57,6 +60,7 @@ public class Cluster {
         this.children = children;
     }
 
+    @JsonIgnore
     public Cluster getParent() {
         return parent;
     }
